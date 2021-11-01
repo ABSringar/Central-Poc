@@ -1,0 +1,7 @@
+{
+    "getContentPathPattern": "/content/centralthai/(.*)|/conf/centralthai/(.*)/settings/wcm/templates/(.*)",
+    "getRequestTimeout": 10000,
+    "getAdditionalRequestHeaders": [
+    
+    ]
+}
