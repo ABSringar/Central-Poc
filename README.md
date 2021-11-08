@@ -124,3 +124,12 @@ A ClientLib will consist of the following files and directories:
 The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
 
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+    
+## GraphQL Setup in localSetup
+
+Setup the environment variable with commerce endpoint.
+* Edit environment variable create new variable name: COMMERCE_ENDPOINT value: https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/graphql
+* Go to http://localhost:4502/system/console/configMgr in your local chrome browser.
+* Navigate to OSGi in top menu.
+* Search for GraphQL client configuration factory.
+* Replace Graphql service URL with $[env:COMMERCE_ENDPOINT;default=]
