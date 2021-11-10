@@ -22,6 +22,8 @@ import javax.annotation.PostConstruct;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
@@ -31,9 +33,13 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
+import java.util.Locale;
 import java.util.Optional;
 
-@Model(adaptables = Resource.class)
+@Model(adaptables = Resource.class,
+defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+resourceType = "centralthai/components/helloworld")
+@Exporter(name="jackson",extensions = "json")
 public class HelloWorldModel {
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
@@ -45,6 +51,10 @@ public class HelloWorldModel {
     @SlingObject
     private ResourceResolver resourceResolver;
 
+
+    @ValueMapValue
+    private String text;
+
     private String message;
 
     @PostConstruct
@@ -53,7 +63,7 @@ public class HelloWorldModel {
         String currentPagePath = Optional.ofNullable(pageManager)
                 .map(pm -> pm.getContainingPage(currentResource))
                 .map(Page::getPath).orElse("");
-
+        text = text.toUpperCase(Locale.ROOT);
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n";
@@ -63,4 +73,7 @@ public class HelloWorldModel {
         return message;
     }
 
+    public String getText() {
+        return text;
+    }
 }
