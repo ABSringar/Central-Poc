@@ -8,7 +8,8 @@
         cq:template="/libs/cif/shell/components/configuration/page/template"
         sling:resourceType="cif/shell/components/configuration/page"
         cq:graphqlClient="default"
-        magentoRootCategoryId="Mg=="
+        magentoRootCategoryId="2"
         magentoStore="default"
+        magentoGraphqlEndpoint="/api/graphql"
         enableUIDSupport="true"/>
 </jcr:root>
