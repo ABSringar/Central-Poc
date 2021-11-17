@@ -43,6 +43,7 @@ import CheckoutPage from '../CheckoutPage';
 import loadLocaleData from './i18n';
 
 import '../../site/main.scss';
+import Epsilon from '../Epsilon';
 
 const App = props => {
     const { mountingPoints, pagePaths, storeView } = config;
@@ -91,6 +92,10 @@ const App = props => {
                                 <ResetPassword />
                             </Portal>
                         </Route>
+
+                        <Portal selector={mountingPoints.epsilonProductTestContainer}>
+                            <Epsilon />
+                        </Portal>
 
                         <Portal selector={mountingPoints.bundleProductOptionsContainer}>
                             <BundleProductOptions />

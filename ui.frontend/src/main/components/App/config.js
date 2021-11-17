@@ -62,7 +62,8 @@ export default {
         resetPasswordPage: '.resetpassword__body',
         productRecs: '[data-is-product-recs]',
         cartDetailsContainer: '.cartcontainer__body',
-        checkoutPageContainer: '.checkoutpage__body'
+        checkoutPageContainer: '.checkoutpage__body',
+        epsilonProductTestContainer: '.epsilon__body'
     },
     pagePaths: {
         baseUrl,
@@ -70,6 +71,7 @@ export default {
         accountDetails: `${basePath}/my-account/account-details.html`,
         cartDetails: `${basePath}/cart-details.html`,
         resetPassword: `${basePath}/reset-password.html`,
-        checkoutPage: `${basePath}/checkout.html`
+        checkoutPage: `${basePath}/checkout.html`,
+        productTest: `${basePath}/product-test.html`
     }
 };
