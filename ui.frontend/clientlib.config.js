@@ -67,6 +67,34 @@ module.exports = {
                     ignore: ['**/*.js', '**/*.css']
                 }
             }
+        },
+        {
+            ...libsBaseConfig,
+            name: 'clientlib-site-coral',
+            categories: ['centralthai.site.coral'],
+            dependencies: ['centralthai.dependencies', 'aem-core-cif-react-components'],
+            assets: {
+                // Copy entrypoint scripts and stylesheets into the respective ClientLib
+                // directories
+                js: {
+                    cwd: 'clientlib-site-coral',
+                    files: ['**/*.js'],
+                    flatten: false
+                },
+                css: {
+                    cwd: 'clientlib-site-coral',
+                    files: ['**/*.css'],
+                    flatten: false
+                },
+
+                // Copy all other files into the `resources` ClientLib directory
+                resources: {
+                    cwd: 'clientlib-site-coral',
+                    files: ['**/*.*'],
+                    flatten: false,
+                    ignore: ['**/*.js', '**/*.css']
+                }
+            }
         }
     ]
 };

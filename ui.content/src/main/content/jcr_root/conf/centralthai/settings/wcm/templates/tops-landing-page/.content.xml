@@ -6,6 +6,6 @@
         cq:lastModifiedBy="admin"
         cq:templateType="/conf/centralthai/settings/wcm/template-types/page"
         jcr:primaryType="cq:PageContent"
-        jcr:title="Landing page"
-        status="disabled"/>
+        jcr:title="Tops Landing page"
+        status="enabled"/>
 </jcr:root>
