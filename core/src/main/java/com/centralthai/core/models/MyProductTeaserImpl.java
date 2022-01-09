@@ -15,6 +15,10 @@ package com.centralthai.core.models;
 
 import java.time.format.DateTimeFormatter;
 
+import com.adobe.cq.commerce.core.components.internal.models.v1.categorylist.CategoriesRetriever;
+import com.adobe.cq.commerce.core.components.models.retriever.AbstractCategoriesRetriever;
+import com.adobe.cq.commerce.magento.graphql.SimpleProductQuery;
+import com.adobe.cq.commerce.magento.graphql.SimpleProductQueryDefinition;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
@@ -31,6 +35,8 @@ import com.adobe.cq.commerce.core.components.models.common.Price;
 import com.adobe.cq.commerce.core.components.models.productteaser.ProductTeaser;
 import com.adobe.cq.commerce.core.components.models.retriever.AbstractProductRetriever;
 
+import javax.annotation.PostConstruct;
+
 @Model(adaptables = SlingHttpServletRequest.class, adapters = MyProductTeaser.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL, resourceType = MyProductTeaserImpl.RESOURCE_TYPE)
 @Exporter(name = "jackson",extensions = "json")
 
@@ -44,11 +50,20 @@ public class MyProductTeaserImpl implements MyProductTeaser {
     @Via(type = ResourceSuperType.class)
     private ProductTeaser productTeaser;
 
+
     @ScriptVariable
     private ValueMap properties;
+    private AbstractProductRetriever productRetriever;
+    private AbstractCategoriesRetriever categoriesRetriever;
+
+    @PostConstruct
+    public void init() {
+        productRetriever = productTeaser.getProductRetriever();
+
+    }
 
 	/*
-	 * private AbstractProductRetriever productRetriever;
+	 *
 	 * 
 	 * @PostConstruct public void initModel() { productRetriever =
 	 * productTeaser.getProductRetriever();

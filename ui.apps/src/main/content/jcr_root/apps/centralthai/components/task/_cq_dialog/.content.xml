@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-          jcr:primaryType="nt:unstructured"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
     jcr:title="Properties"
-          extraClientlibs="products.listenrs"
     sling:resourceType="cq/gui/components/authoring/dialog">
     <content
         jcr:primaryType="nt:unstructured"
@@ -12,22 +11,23 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
-                    <country
+
+                    <api
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/select"
-                            fieldLabel="Products"
-                            class="product_class"
-                            name="./products">
+                            fieldLabel="API Type"
+                            name="./apiType">
                         <items jcr:primaryType="nt:unstructured">
-                            <checkbox
+                            <insider
                                     jcr:primaryType="nt:unstructured"
-                                    text="Select products "
-                                    value=""/>
+                                    text="Insider"
+                                    value="insider"/>
+                            <algolia
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Algolia"
+                                    value="algolia"/>
                         </items>
-                        <!--<datasource
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="/central/getProducts"/>-->
-                    </country>
+                    </api>
                 </items>
             </column>
         </items>

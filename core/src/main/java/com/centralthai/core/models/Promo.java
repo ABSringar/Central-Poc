@@ -1,9 +1,12 @@
 package com.centralthai.core.models;
+
 import com.centralthai.core.pojo.PromoModel;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -12,7 +15,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Model(adaptables = Resource.class,
-        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+        resourceType = "centralthai/components/promo")
+@Exporter(name = "jackson", extensions = "json")
 public class Promo {
 
     @Inject

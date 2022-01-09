@@ -7,7 +7,7 @@
         sling:configPropertyInherit="true"
         cq:template="/libs/cif/shell/components/configuration/page/template"
         sling:resourceType="cif/shell/components/configuration/page"
-        cq:graphqlClient="default"
+        cq:graphqlClient="custom"
         magentoRootCategoryId="2"
         magentoStore="default"
         magentoGraphqlEndpoint="/api/graphql"

@@ -150,5 +150,15 @@ Import-Package: javax.annotation;version=0.0.0,*\
             <version>1.4.4</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
     </dependencies>
 </project>
