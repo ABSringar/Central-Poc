@@ -20,6 +20,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { DefinePlugin } = webpack;
+const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 const SOURCE_ROOT = __dirname + '/src/main';
 const alias = Object.keys(pkg.dependencies)
@@ -132,9 +133,11 @@ module.exports = (env) => ({
     plugins: [
         new CleanWebpackPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new MiniCssExtractPlugin({
+      new MiniCssExtractPlugin({
             filename: 'clientlib-site/[name].css'
         }),
+
+        new UnminifiedWebpackPlugin(),
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, SOURCE_ROOT + '/resources'),
@@ -161,6 +164,7 @@ module.exports = (env) => ({
                     chunks: 'all',
                     enforce: true,
                 },
+                minimize: false
             }
         }
     },
