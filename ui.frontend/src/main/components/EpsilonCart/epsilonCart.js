@@ -1,26 +1,12 @@
 import { useEffect } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from '@apollo/client';
+import { categoryList } from '../graphQl/queries';
 
 const epsilonCart = () => {
-    useEffect(() => {
-        const client = new ApolloClient({
-            uri: 'https://48p1r2roz4.sse.codesandbox.io',
-            cache: new InMemoryCache()
-        });
-        client
-            .query({
-                query: gql`
-                    query GetRates {
-                        rates(currency: "USD") {
-                            currency
-                        }
-                    }
-                `
-            })
-            .then(result => console.log(result));
-    }, []);
+    const data = useQuery(categoryList);
+    console.log(data);
 
-    return <div></div>;
+    return <div>Epsilon Cart Authoring </div>;
 };
 
 export default epsilonCart;
