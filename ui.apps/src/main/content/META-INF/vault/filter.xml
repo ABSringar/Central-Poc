@@ -2,5 +2,6 @@
 <workspaceFilter version="1.0">
     <filter root="/apps/centralthai/clientlibs"/>
     <filter root="/apps/centralthai/components"/>
+    <filter root="/apps/centralthai/commons"/>
     <filter root="/apps/centralthai/i18n"/>
 </workspaceFilter>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Product Filter"
+          sling:resourceType="cq/gui/components/authoring/dialog"
+          extraClientlibs="[cif.shell.picker,products.filters.listenrs]">
+    <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                    maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <filters
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Filter Properties"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                    margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <sortoptions
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/form/select"
+                                                    fieldLabel="Select Filter type"
+                                                    fieldDescription="Filter products based on type"
+                                                    name="./filterType">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <name
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Product Sku"
+                                                            value="sku"/>
+                                                    <price
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Filter by Attributes"
+                                                            value="attributes"/>
+                                                </items>
+                                            </sortoptions>
+                                            <product
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="commerce/gui/components/common/cifproductfield"
+                                                    fieldDescription="The product or product variant displayed by the teaser"
+                                                    fieldLabel="Select Products"
+                                                    filter="folderOrProductOrVariant"
+                                                    multiple="{Boolean}true"
+                                                    name="./productSku"
+                                                    selectionId="combinedSku"/>
+                                            <category
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="commerce/gui/components/common/cifcategoryfield"
+                                                    fieldLabel="Category"
+                                                    multiple="{Boolean}true"
+                                                    name="./categoryId"/>
+                                            <filtertags
+                                                    cq:showOnCreate="{Boolean}true"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="cq/gui/components/common/tagspicker"
+                                                    allowCreate="{Boolean}true"
+                                                    fieldLabel="Configure Filter Tags"
+                                                    fieldDescription="Select attribute tags to apply filters for products"
+                                                    metaType="tags"
+                                                    name="./filterTags"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </filters>
+                    <sort
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Sorting Properties"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                    margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <noofitems
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                    fieldLabel="Configure number of products to be shown"
+                                                    fieldDescription="Number of Products to be shown"
+                                                    name="./noOfProducts"/>
+                                            <sortoptions
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/form/select"
+                                                    fieldLabel="Select sort by attribute"
+                                                    fieldDescription="Sort products based on the attribute selected"
+                                                    name="./sortAttribute">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <name
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Product Name"
+                                                            value="name"/>
+                                                    <price
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Product Price"
+                                                            value="price"/>
+                                                    <position
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Product Position"
+                                                            value="position"/>
+                                                </items>
+                                            </sortoptions>
+                                            <sortorder
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/form/select"
+                                                    fieldLabel="Select sort order"
+                                                    fieldDescription="Sort products based on the order selected"
+                                                    name="./sortOrder">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <ascending
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Ascending"
+                                                            value="ASC"/>
+                                                    <desceinding
+                                                            jcr:primaryType="nt:unstructured"
+                                                            text="Descending"
+                                                            value="DESC"/>
+                                                </items>
+                                            </sortorder>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </sort>
+                    <update
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Update Filters"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                    margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <noofitems
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/button"
+                                                    text="Update Filter Attributes"
+                                                    class="update_filters coral-Button--primary"
+                                                    name="./updateFilters"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </update>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

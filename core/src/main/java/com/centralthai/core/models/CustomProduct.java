@@ -9,14 +9,6 @@ import java.util.List;
 
 public interface CustomProduct extends Component {
 
-    CommerceIdentifier getCommerceIdentifier();
-
-    String getName();
-
-    String getSku();
-
-    String getUrl();
-
     List<CustomProductPojo> getProducts();
 
     AbstractCustomProductRetriever getCustomProductRetriever();

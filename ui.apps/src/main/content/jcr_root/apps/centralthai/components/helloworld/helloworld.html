@@ -15,8 +15,9 @@
 */-->
 <div class="cmp-helloworld" data-cmp-is="helloworld">
     <div class="cmp-helloworld__item" data-sly-use.model="com.centralthai.core.models.HelloWorldModel" data-sly-test="${model.message}">
-        <p class="cmp-helloworld__item-label">Model message:</p>
-        <pre class="cmp-helloworld__item-output"data-cmp-hook-helloworld="model">${model.message}</pre>
-        <h1>${model.message}</h1>
+
     </div>
+    <sly data-sly-use.image="${'com.centralthai.core.models.ImageModel' @ imagePath = '/content/dam/venia/shop_the_latest_image1.jpg'}">
+        <h1>${image.alt}</h1>
+    </sly>
 </div>

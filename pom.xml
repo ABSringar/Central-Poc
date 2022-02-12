@@ -50,7 +50,7 @@
         <vault.password>admin</vault.password>
         <frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
         <core.wcm.components.version>2.17.10</core.wcm.components.version>
-        <core.cif.components.version>2.3.0</core.cif.components.version>
+        <core.cif.components.version>2.3.1</core.cif.components.version>
         <magento.graphql.version>9.0.0-magento242ee</magento.graphql.version>
         <aem.cif.sdk.api>2021.02.01</aem.cif.sdk.api>
 
@@ -630,6 +630,14 @@ Bundle-DocURL:
                 <artifactId>commons-lang3</artifactId>
                 <version>3.0</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.query -->
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.query</artifactId>
+                <version>4.0.2</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 

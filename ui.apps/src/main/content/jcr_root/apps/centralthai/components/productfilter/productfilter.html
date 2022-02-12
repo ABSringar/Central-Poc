@@ -1,0 +1,10 @@
+<div data-sly-use.body="com.centralthai.core.models.CustomProductImpl">
+    <sly data-sly-list.list="${body.productslist}">
+        <div class="container">
+            <a href=${list.url}><img src="${list.image}" height="200px" width="200px"/></a>
+            <h1>${list.name}</h1>
+            <h2>${list.sku}</h2>
+            <h2>$${list.price}</h2>
+        </div>
+    </sly>
+</div>

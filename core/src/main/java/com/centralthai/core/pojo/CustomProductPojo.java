@@ -1,6 +1,6 @@
 package com.centralthai.core.pojo;
 
-public class CustomProductPojo  {
+public class CustomProductPojo {
 
 
     String name;
@@ -8,6 +8,20 @@ public class CustomProductPojo  {
     String sku;
 
     String url;
+
+    String image;
+
+    String price;
+
+    String style;
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
 
     public String getName() {
         return name;
@@ -25,14 +39,31 @@ public class CustomProductPojo  {
         this.sku = sku;
     }
 
-    public String getUrl() {
-        return url;
-    }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
 }

@@ -15,7 +15,7 @@
  |  limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.centralthai</groupId>
@@ -96,7 +96,7 @@ Import-Package: javax.annotation;version=0.0.0,*\
             <groupId>com.adobe.commerce.cif</groupId>
             <artifactId>core-cif-components-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.adobe.commerce.cif</groupId>
             <artifactId>magento-graphql</artifactId>
@@ -159,6 +159,10 @@ Import-Package: javax.annotation;version=0.0.0,*\
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.query</artifactId>
         </dependency>
     </dependencies>
 </project>

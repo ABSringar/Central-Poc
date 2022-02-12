@@ -27,7 +27,7 @@ if (storeConfigEl) {
 
 const baseUrl = storeConfig.storeRootUrl;
 const basePath = baseUrl.substr(0, baseUrl.indexOf('.'));
-
+console.log(basePath, baseUrl)
 // necessary to be set for venia-ui components
 window.STORE_VIEW_CODE = storeConfig.storeView || '';
 window.AVAILABLE_STORE_VIEWS = [

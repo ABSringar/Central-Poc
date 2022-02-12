@@ -59,7 +59,7 @@ public class MyProductTeaserImpl implements MyProductTeaser {
     @PostConstruct
     public void init() {
         productRetriever = productTeaser.getProductRetriever();
-
+        productRetriever.setQuery("");
     }
 
 	/*

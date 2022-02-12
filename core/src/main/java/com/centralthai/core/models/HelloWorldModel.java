@@ -19,6 +19,9 @@ import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_T
 
 import javax.annotation.PostConstruct;
 
+import com.centralthai.core.commons.assethelper.AssetHelper;
+import com.centralthai.core.commons.restutility.ResponseModel;
+import com.centralthai.core.commons.restutility.RestClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.methods.HttpPost;
@@ -31,6 +34,7 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
@@ -50,7 +54,8 @@ public class HelloWorldModel {
     private ResourceResolver resourceResolver;
 
 
-
+    @OSGiService
+    RestClient restClient;
 
     @ValueMapValue
     private String products;
@@ -63,7 +68,8 @@ public class HelloWorldModel {
 
     @PostConstruct
     protected void init() {
-        String res = null;
+        AssetHelper.getAssetsFromRootFolder(resourceResolver.resolve("/content/dam/venia/test"));
+        /*String res = null;
         try {ObjectMapper mapper = new ObjectMapper();
             try {
                 String jsonString = mapper.writeValueAsString("");
@@ -73,7 +79,7 @@ public class HelloWorldModel {
             CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpPost post = new HttpPost("https://staging-mdc.central.co.th/graphql");
             post.addHeader("Content-Type", "application/json");
-            post.addHeader("Accept", "application/json");/*
+            post.addHeader("Accept", "application/json");*//*
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("query","query {\\n\" +\n" +
                     "                    \"  episodesByIds(ids: [1, 2]) {\\n\" +\n" +
@@ -83,8 +89,8 @@ public class HelloWorldModel {
                     "                    \"    }\\n\" +\n" +
                     "                    \"  }\\n\" +\n" +
                     "                    \"}");
-            jsonObject.put("variables",new JSONObject());*/
-         /*   String productQuery = "{\"operationName\":\"categoryListWithProducts\",\"variables\":{\"pageSize\":25,\"page\":1,\"sort\":{\"name\":\"ASC\"},\"uid\":\"260\"},\"query\":\"query categoryListWithProducts($uid:String!$pageSize:Int!$sort:ProductAttributeSortInput!$page:Int!){categoryList(filters:{category_uid:{eq:$uid}}){image uid name url_key updated_at __typename breadcrumbs{category_uid category_name category_url_key __typename}children{image uid name url_key updated_at __typename children_count product_count breadcrumbs{category_uid category_name category_url_key __typename}}products(pageSize:$pageSize sort:$sort currentPage:$page){page_info{total_pages __typename}total_count items{__typename id uid sku name thumbnail{url __typename}url_key updated_at price_range{minimum_price{final_price{currency value __typename}__typename}__typename}}__typename}}}\"}";
+            jsonObject.put("variables",new JSONObject());*//*
+         *//*   String productQuery = "{\"operationName\":\"categoryListWithProducts\",\"variables\":{\"pageSize\":25,\"page\":1,\"sort\":{\"name\":\"ASC\"},\"uid\":\"260\"},\"query\":\"query categoryListWithProducts($uid:String!$pageSize:Int!$sort:ProductAttributeSortInput!$page:Int!){categoryList(filters:{category_uid:{eq:$uid}}){image uid name url_key updated_at __typename breadcrumbs{category_uid category_name category_url_key __typename}children{image uid name url_key updated_at __typename children_count product_count breadcrumbs{category_uid category_name category_url_key __typename}}products(pageSize:$pageSize sort:$sort currentPage:$page){page_info{total_pages __typename}total_count items{__typename id uid sku name thumbnail{url __typename}url_key updated_at price_range{minimum_price{final_price{currency value __typename}__typename}__typename}}__typename}}}\"}";
             post.setEntity(new StringEntity(productQuery));
             HttpResponse response = httpclient.execute(post);
             org.apache.http.HttpEntity entity = response.getEntity();
@@ -96,10 +102,10 @@ public class HelloWorldModel {
                 JSONObject jsonObject1 = new JSONObject(jsonArray.get(0).toString());
                 name =jsonObject1.getString("name");
                 sku = jsonObject1.getString("sku");
-            }*/
+            }*//*
 
         } catch (Exception exception) {
-        }
+        }*/
     }
 
 
