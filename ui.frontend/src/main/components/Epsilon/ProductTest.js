@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from '@apollo/client';
+import { categoryList } from '../graphQl/queries';
 
 const ProductTest = () => {
     const [data, setData] = useState('');
+
+    const apollDataTEsting = useQuery(categoryList);
+    console.log(apollDataTEsting.data);
 
     useEffect(() => {
         const url = '/content/centralthai/us/en/jcr:content/root/container/container/producttest.model.json';
