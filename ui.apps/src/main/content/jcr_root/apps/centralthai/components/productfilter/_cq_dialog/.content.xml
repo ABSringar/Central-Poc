@@ -33,6 +33,7 @@
                                                     jcr:primaryType="nt:unstructured"
                                                     sling:resourceType="granite/ui/components/foundation/form/select"
                                                     fieldLabel="Select Filter type"
+                                                    class="filter-type"
                                                     fieldDescription="Filter products based on type"
                                                     name="./filterType">
                                                 <items jcr:primaryType="nt:unstructured">
@@ -54,22 +55,32 @@
                                                     filter="folderOrProductOrVariant"
                                                     multiple="{Boolean}true"
                                                     name="./productSku"
+                                                    class="product-sku-picker"
                                                     selectionId="combinedSku"/>
-                                            <category
+                                            <column
                                                     jcr:primaryType="nt:unstructured"
-                                                    sling:resourceType="commerce/gui/components/common/cifcategoryfield"
-                                                    fieldLabel="Category"
-                                                    multiple="{Boolean}true"
-                                                    name="./categoryId"/>
-                                            <filtertags
-                                                    cq:showOnCreate="{Boolean}true"
-                                                    jcr:primaryType="nt:unstructured"
-                                                    sling:resourceType="cq/gui/components/common/tagspicker"
-                                                    allowCreate="{Boolean}true"
-                                                    fieldLabel="Configure Filter Tags"
-                                                    fieldDescription="Select attribute tags to apply filters for products"
-                                                    metaType="tags"
-                                                    name="./filterTags"/>
+                                                    class="filter-container"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <category
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="commerce/gui/components/common/cifcategoryfield"
+                                                            fieldLabel="Category"
+                                                            multiple="{Boolean}true"
+                                                            class="category-picker"
+                                                            name="./categoryId"/>
+                                                    <filtertags
+                                                            cq:showOnCreate="{Boolean}true"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="cq/gui/components/common/tagspicker"
+                                                            allowCreate="{Boolean}true"
+                                                            fieldLabel="Configure Filter Tags"
+                                                            fieldDescription="Select attribute tags to apply filters for products"
+                                                            metaType="tags"
+                                                            class="filter-tag-picker"
+                                                            name="./filterTags"/>
+                                                </items>
+                                            </column>
                                         </items>
                                     </column>
                                 </items>

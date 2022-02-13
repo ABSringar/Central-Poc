@@ -25,7 +25,7 @@ import java.io.IOException;
                 Constants.SERVICE_DESCRIPTION + "=Create Filter Tags Servlet",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
                 "sling.servlet.paths=/central/createFilterTags",
-                "sling.servlet.selectors=abc",
+                "sling.servlet.selectors=filtertags",
                 "sling.servlet.extensions=json"
         })
 @ServiceDescription("Create Filter Tags Servlet")
@@ -62,7 +62,7 @@ public class FilterTags extends SlingSafeMethodsServlet {
                             data -> createFilterTags(item.getAttributeCode(), data.getLabel(), data.getValue())
                     ));
 
-            resp.getWriter().write(String.valueOf("Created successfully"));
+            resp.getWriter().write(String.valueOf("Created Filter Tags Successfully"));
         } else {
             resp.getWriter().write(String.valueOf("Oops something went wrong ....."));
         }

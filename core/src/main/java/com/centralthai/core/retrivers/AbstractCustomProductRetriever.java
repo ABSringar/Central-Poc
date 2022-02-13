@@ -21,7 +21,7 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
     protected String sortKey;
     protected String sortOrder;
     protected int limit;
-    List<FilterAttributeMetadata> availableFilters;
+    protected List<FilterAttributeMetadata> availableFilters;
 
     protected Consumer<ProductInterfaceQuery> productQueryHook;
 
@@ -31,6 +31,10 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
         super(client);
     }
 
+    /**
+     * Method to fetch products by creating graphql query and executing it
+     * @return
+     */
     public List<ProductInterface> fetchProducts() {
         if (this.products == null) {
             populate();
@@ -38,6 +42,16 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
         return this.products;
     }
 
+
+    /**
+     * To set filter and sort attributes
+     *
+     * @param identifier
+     * @param sortKey
+     * @param sortOrder
+     * @param availableFilters
+     * @param noOfProducts
+     */
     public void setIdentifier(Map<String, Object> identifier, String sortKey, String sortOrder, List<FilterAttributeMetadata> availableFilters, int noOfProducts) {
         products = null;
         query = null;
@@ -48,6 +62,11 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
         this.limit = noOfProducts;
     }
 
+    /**
+     * Method to extend product query in models and servlets
+     *
+     * @param productQueryHook
+     */
     public void extendProductQueryWith(Consumer<ProductInterfaceQuery> productQueryHook) {
         if (this.productQueryHook == null) {
             this.productQueryHook = productQueryHook;
@@ -67,7 +86,12 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
         }
     }
 
-    private String generateProductsQueryString(Map<String, Object> identifier, List<FilterAttributeMetadata> availableFilters, String sortKey, String sortOrder, int pageSize) {
+    /**
+     * This method constructs Graphql query based on the filter attributes configured by an author
+     *
+     * @return query
+     */
+    private String generateProductsQueryString() {
         CustomGenericProductAttributeFilterInput filterInputs = new CustomGenericProductAttributeFilterInput();
         identifier.entrySet().stream().filter((field) -> {
             return availableFilters.stream().anyMatch((item) -> {
@@ -90,11 +114,8 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
                     filterxx.setTo(rangeValues[0]);
                     filterInputs.addRangeTypeInput(code, filterxx);
                 } else if (rangeValues.length > 1) {
-                    if (StringUtils.isNumeric(rangeValues[0])) {
+                    if (StringUtils.isNumeric(rangeValues[0]) && StringUtils.isNumeric(rangeValues[1])) {
                         filterxx.setFrom(rangeValues[0]);
-                    }
-
-                    if (StringUtils.isNumeric(rangeValues[1])) {
                         filterxx.setTo(rangeValues[1]);
                     }
 
@@ -103,8 +124,24 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
             }
 
         });
+        QueryQuery.ProductsArgumentsDefinition searchArgs = getSearchArguments(filterInputs);
+        ProductsQueryDefinition queryArgs = (productsQuery) -> {
+            productsQuery.totalCount().items(generateCustomProductQuery());
+        };
+        return Operations.query((query) -> {
+            query.products(searchArgs, queryArgs);
+        }).toString();
+    }
+
+    /**
+     * This method is used to create search argument quries based on the filter inputs
+     *
+     * @param filterInputs
+     * @return search argument query
+     */
+    protected QueryQuery.ProductsArgumentsDefinition getSearchArguments(CustomGenericProductAttributeFilterInput filterInputs) {
         QueryQuery.ProductsArgumentsDefinition searchArgs = (productArguments) -> {
-            productArguments.pageSize(pageSize);
+            productArguments.pageSize(limit);
             productArguments.filter(filterInputs);
             ProductAttributeSortInput sort = new ProductAttributeSortInput();
             SortEnum sortEnum = SortEnum.valueOf(sortOrder);
@@ -124,20 +161,18 @@ public abstract class AbstractCustomProductRetriever extends AbstractRetriever {
             if (validSortKey) {
                 productArguments.sort(sort);
             }
-
-
         };
-        ProductsQueryDefinition queryArgs = (productsQuery) -> {
-            productsQuery.totalCount().items(generateCustomProductQuery());
-        };
-        return Operations.query((query) -> {
-            query.products(searchArgs, queryArgs);
-        }).toString();
+        return searchArgs;
     }
 
+    /**
+     * Method to execute graphql request after query construction
+     *
+     * @return GraphqlResponse
+     */
     protected GraphqlResponse<Query, Error> executeQuery() {
         if (query == null) {
-            query = generateProductsQueryString(identifier, availableFilters, sortKey, sortOrder, limit);
+            query = generateProductsQueryString();
         }
         return client.execute(query);
     }

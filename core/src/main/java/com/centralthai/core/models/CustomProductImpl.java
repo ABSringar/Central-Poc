@@ -1,7 +1,6 @@
 package com.centralthai.core.models;
 
 import com.adobe.cq.commerce.core.components.client.MagentoGraphqlClient;
-import com.adobe.cq.commerce.core.components.models.common.CommerceIdentifier;
 import com.adobe.cq.commerce.core.components.services.urls.UrlProvider;
 import com.adobe.cq.commerce.core.search.models.FilterAttributeMetadata;
 import com.adobe.cq.commerce.core.search.services.SearchFilterService;
@@ -107,25 +106,29 @@ public class CustomProductImpl implements CustomProduct {
     }
 
     /**
-     *
+     * This method sets the identifiers from the configured filter tags
      */
     private void getFilterArguments() {
         if (filterTags != null) {
             for (String tagId : filterTags) {
                 Tag tag = adaptResourceToTag(tagId);
-                String attributeName = tag.getParent().getName();
-                String attributeValue = tag.getName();
-                List<String> values = Optional.ofNullable(identifiers.get(attributeName)).isPresent()
-                        ? (List<String>) identifiers.get(attributeName) : new ArrayList<>();
-                values.add(attributeValue);
-                identifiers.put(attributeName, values);
+                if (Optional.ofNullable(tag).isPresent()) {
+                    String attributeName = tag.getParent().getName();
+                    String attributeValue = tag.getName();
+                    List<String> values = Optional.ofNullable(identifiers.get(attributeName)).isPresent()
+                            ? (List<String>) identifiers.get(attributeName) : new ArrayList<>();
+                    values.add(attributeValue);
+                    identifiers.put(attributeName, values);
+                }
             }
         }
     }
 
     /**
+     * This method resolves tag from the tagId
+     *
      * @param tagId
-     * @return
+     * @return tag
      */
     public Tag adaptResourceToTag(String tagId) {
         Tag tag = null;
@@ -139,7 +142,7 @@ public class CustomProductImpl implements CustomProduct {
     }
 
     /**
-     *
+     * This method fetches filter product from graphql response and bind to response object
      */
     private void getFilteredProducts() {
         if (identifiers.size() > 0) {
