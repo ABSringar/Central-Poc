@@ -1,0 +1,6 @@
+#base=js
+dialog-tab-hide-show.js
+checkbox-hide-show.js
+rte-height.js
+dropdown-multiple-value-hide-show.js
+color-picker.js
